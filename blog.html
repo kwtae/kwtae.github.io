@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>블로그</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>블로그</h1>
+    <button onclick="setLanguage('ko')">🇰🇷 한국어</button>
+    <button onclick="setLanguage('en')">🇺🇸 English</button>
+    <br/>
+    <label>태그 필터:
+      <select id="tagFilter" onchange="renderPostList()"></select>
+    </label>
+    <label>카테고리:
+      <select id="categoryFilter" onchange="renderPostList()">
+        <option value="">전체</option>
+        <option value="이론">이론</option>
+        <option value="실습">실습</option>
+      </select>
+    </label>
+    <label>검색:
+      <input type="text" id="searchInput" oninput="renderPostList()" />
+    </label>
+  </header>
+  <main>
+    <ul id="postList"></ul>
+    <div id="pagination"></div>
+  </main>
+  <script src="posts.js"></script>
+  <script src="lang.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
