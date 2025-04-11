@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>새 글 작성</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>✍ 새 글 작성</h1>
+    <a href="blog.html">← 목록으로</a>
+  </header>
+  <main>
+    <form id="postForm">
+      <label>제목 (한국어):<br><input type="text" name="title_ko" required /></label><br>
+      <label>Title (English):<br><input type="text" name="title_en" required /></label><br>
+      <label>내용 (한국어):<br><textarea name="content_ko" rows="4" required></textarea></label><br>
+      <label>Content (English):<br><textarea name="content_en" rows="4" required></textarea></label><br>
+      <label>카테고리:<br><input type="text" name="category" required /></label><br>
+      <label>태그 (쉼표로 구분):<br><input type="text" name="tags" /></label><br>
+      <label>작성일 (YYYY-MM-DD):<br><input type="date" name="date" required /></label><br>
+      <label>이미지 URL (선택):<br><input type="url" name="image" /></label><br>
+      <button type="submit">📌 저장 코드 생성</button>
+    </form>
+    <pre id="output"></pre>
+  </main>
+  <script>
+    document.getElementById("postForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const data = {
+        id: Date.now(),
+        category: form.category.value,
+        date: form.date.value,
+        tags: form.tags.value.split(',').map(t => t.trim()).filter(t => t),
+        title: {
+          ko: form.title_ko.value,
+          en: form.title_en.value
+        },
+        content: {
+          ko: form.content_ko.value,
+          en: form.content_en.value
+        },
+        image: form.image.value || undefined
+      };
+      document.getElementById("output").textContent = JSON.stringify(data, null, 2);
+    });
+  </script>
+</body>
+</html>
